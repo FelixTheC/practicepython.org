@@ -8,7 +8,7 @@ while True:
 	user = input("Your guess or 'exit' to quit ")
 	if user == 'exit':
 		break
-	else:
+	else:	
 		try:
 			if int(user) == theNum:
 				guess += 1
@@ -22,4 +22,4 @@ while True:
 				print('Your guess was to high')
 		except:
 			print('Please check your input')
-	
+

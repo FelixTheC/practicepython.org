@@ -8,3 +8,7 @@ def fib(maximum):
 		a,b = b, b+a
 		fib_list.append(b)
 	return fib_list
+	
+	
+if __name__ == "__main__":
+	print(fib(100))
