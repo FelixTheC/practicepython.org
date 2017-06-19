@@ -12,7 +12,12 @@ class PwdGen():
         self.symb = ['#','!','_','-','$','&','?','*',' ']
         self.pwd = ''
         self.pwdList = []
-    
+        
+    def __call__(self):
+        return {'weak':self.weak(),
+                'middle':self.middle(),
+                'strong':self.strong()}
+        
     def weak(self, choice=choice):
         if len(self.pwdList) > 0:
             self.pwdList.clear()
@@ -47,9 +52,10 @@ class PwdGen():
     
 
 if __name__ == "__main__":
-    gen = PwdGen()
-    print(gen.weak())
-    print(gen.middle())
-    print(gen.strong())
+    pwd = PwdGen()
+    print(pwd())
+    weak = pwd()['weak']
+    print(weak)
+    print(pwd.weak())
                 
     
