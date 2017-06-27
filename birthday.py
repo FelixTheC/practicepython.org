@@ -37,7 +37,3 @@ class Birthday:
         except:
             return False
     
-
-
-birth = Birthday()
-print(birth.get_birthday_by_name('Amelie'))
