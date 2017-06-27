@@ -1,39 +1,43 @@
 #-*-coding:utf8;-*-
 #qpy:3
 #qpy:console
+import json
 
-class Birthday():
-    import json
+class Birthday:
+    
+    birthDic = {}
     
     def __init__(self):
-        self.birthDic = self.readFile()
-        if self.birthDic == None:
-            self.birthDic = {}
+        self.read_file()
     
     def __str__(self, name, date):
-        print(name + " " + date)        
+        return(name + " " + date)        
         
-    def readFile(self):
+    def read_file(self, jsonFile="birthday.json"):
         try:
-            with open("birthday.json", 'r+') as f:
-                return self.json.load(f) 
-        except:
+            with open(jsonFile, 'r+') as f:
+                self.birthDic = json.load(f) 
+        except FileNotFoundError:
             return None
 
-    def save(self):
-        with open("birthday.json", "w") as f:
-            self.json.dump(self.birthDic , f)
+    def save(self, jsonFile):
+        with open(jsonFile, "w") as f:
+            json.dump(self.birthDic , f)
 
 
-    def getBirthdayByName(self, name):
+    def get_birthday_by_name(self, name):
         date = self.birthDic.get(name, 'no birthday data found')
         return self.__str__(name, date)
 
 
-    def createBirthday(self, name, birthdayString):
+    def create_birthday(self, name, birthdayString):
         try:
             self.birthDic[name] = birthdayString
             return True
         except:
             return False
     
+
+
+birth = Birthday()
+print(birth.get_birthday_by_name('Amelie'))
