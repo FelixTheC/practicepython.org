@@ -27,7 +27,7 @@ class Birthday:
 
     def get_birthday_by_name(self, name):
         date = self.birthDic.get(name, 'no birthday data found')
-        return self.__str__(name, date)
+        return __str__(self, name, date)
 
 
     def create_birthday(self, name, birthdayString):
