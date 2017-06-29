@@ -2,26 +2,30 @@
 
 from random import choice
 
-def getAWord():
+def get_word():
     """the word list is from http://norvig.com/ngrams/sowpods.txt
     """
     words = []
-    with open('30_Pick_Word.txt', 'r') as f:
-        for line in f:
-            words.append(line.replace('\n','').lower())
+    try:
+        with open('30_Pick_Word.txt', 'r') as f:
+            for line in f:
+                words.append(line.replace('\n','').lower())
+    except FileNotFoundError:
+        words = ['hamster','teddy']
     return choice(words)
 
-def showHiddenWord(word):
+
+def show_hidden_word(word):
     return ['_' for i in range(len(word))]
         
-
-def openHiddenField(hiddenliste, dic):
+        
+def open_hidden_field(hiddenliste, dic):
     for key in dic:
         hiddenliste[key] = dic[key]
     return hiddenliste
 
 
-def charInWord(char, word):
+def char_in_word(char, word):
     """checks if a char is in the word therefore I created a dic because it could be that
     one char is more than one time in a word. 
     The key is the index and the right guest char is the value
@@ -36,7 +40,7 @@ def charInWord(char, word):
         return False
     
     
-def createWordFromList(wordListe):
+def create_word_from_list(wordListe):
     word = ''
     return word.join(wordListe)
 
@@ -44,17 +48,17 @@ def createWordFromList(wordListe):
 def main():
     fails = 0
     print('Welcome to hangman')
-    theWord = getAWord()
-    hidden = showHiddenWord(theWord)
+    theWord = get_word()
+    hidden = show_hidden_word(theWord)
     print(hidden)
     while True:
         user = input('Time for your guess ')
-        check = charInWord(user, theWord)
+        check = char_in_word(user, theWord)
         if check:
             #everytime a guess is right the field turns into the char and will be shown
-            print(openHiddenField(hidden, check))
-            if '_' not in openHiddenField(hidden, check):
-                print('You win '+ createWordFromList(openHiddenField(hidden, check)) + ' is the correct answer')
+            print(open_hidden_field(hidden, check))
+            if '_' not in open_hidden_field(hidden, check):
+                print('You win '+ create_word_from_list(open_hidden_field(hidden, check)) + ' is the correct answer')
                 break
         else:
             fails += 1
